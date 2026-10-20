@@ -1,0 +1,26 @@
+{
+  "agent": "regression-testing-agent",
+  "purpose": "Verify untouched capabilities remain functional following code modifications",
+  "trigger": {
+    "positive": [
+      "Run full regression suite after security patch",
+      "Verify PR does not break existing modules"
+    ],
+    "negative": [
+      "Author new feature code",
+      "Draft project plan"
+    ]
+  },
+  "evals": [
+    {
+      "id": "REG-01",
+      "prompt": "Execute regression suite on fixtures/sample-app after updating calculation logic",
+      "expected_output": "All pre-existing test suites executed fresh; zero new failures detected; comparison with baseline logged",
+      "expectations": [
+        "Never assume safety without execution",
+        "Compare with baseline",
+        "Isolate regressions"
+      ]
+    }
+  ]
+}

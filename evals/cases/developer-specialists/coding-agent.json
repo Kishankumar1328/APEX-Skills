@@ -1,0 +1,26 @@
+{
+  "agent": "coding-agent",
+  "purpose": "Verify minimal idiomatic implementation without speculative abstraction",
+  "trigger": {
+    "positive": [
+      "Implement the modulo operator in calculator.js",
+      "Add timestamp parameter to user logger"
+    ],
+    "negative": [
+      "Diagnose why test fails on line 42",
+      "Draft PRD for new feature"
+    ]
+  },
+  "evals": [
+    {
+      "id": "CODING-01",
+      "prompt": "Implement modulo(a, b) in src/calculator.js adhering to existing styles and export list",
+      "expected_output": "Clean function added, proper type validation, exported cleanly",
+      "expectations": [
+        "No unrequested dependencies",
+        "Syntax clean",
+        "Exported properly"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+description = "Run APEX Testing workflow — risk-based test execution, defect investigation, fix verification, and QA reporting."
+
+prompt = """\
+Invoke the testing-skill orchestrator in the active project workspace.
+
+Workflow:
+
+1. Establish the testing objective, requirements, acceptance criteria, and authorization boundaries.
+2. Inspect the repository, Git status, available test runners, environment, dependencies, and existing baseline failures.
+3. Select relevant testing specialists according to the task, risk, architecture, and available tooling. Do not invoke every specialist by default.
+4. Maintain many-to-many traceability between acceptance criteria and test cases where applicable.
+5. Execute appropriate tests using actual project commands. Capture command details, exit codes, executed-test counts when available, and relevant output. Redact sensitive information.
+6. Classify each result using the testing-skill seven-state model: PASSED, FAILED, BLOCKED, SKIPPED, NOT_RUN, FLAKY, or INCONCLUSIVE.
+7. For confirmed defects, use skills/defect-handoff-contract.md when available. Otherwise, document the missing contract and prepare a clearly labeled minimal evidence-based handoff. Route implementation fixes to developer-skill.
+8. After a fix, rerun the original failing reproduction or a valid equivalent, then execute impact-based regression tests. Expand to the full suite when required by risk, policy, or release criteria.
+9. Consolidate the evidence, test metrics, active defects, verification results, coverage gaps, and residual risks into a QA report.
+10. Never fabricate execution, claim unverified results, modify product source code as part of QA without explicit authorization, or grant formal human UAT or release approval.
+
+Report what was actually completed, which checks remain unverified, and the evidence supporting each conclusion.\
+"""

@@ -1,0 +1,26 @@
+{
+  "agent": "testing-strategy-agent",
+  "purpose": "Verify risk-based pyramid distribution and test level selection",
+  "trigger": {
+    "positive": [
+      "Design test pyramid and coverage plan for new billing service",
+      "Define testing strategy for release 2.0"
+    ],
+    "negative": [
+      "Implement feature code",
+      "Draft product PRD"
+    ]
+  },
+  "evals": [
+    {
+      "id": "STRAT-01",
+      "prompt": "Formulate testing strategy for financial ledger service",
+      "expected_output": "Strategy defining Unit base, API integration contract checks, and high-level E2E journeys with entry/exit gates",
+      "expectations": [
+        "Risk prioritization",
+        "Coverage targets",
+        "Entry/exit criteria defined"
+      ]
+    }
+  ]
+}

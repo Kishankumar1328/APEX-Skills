@@ -1,0 +1,17 @@
+description = "Run APEX Developer workflow — implement features, fix bugs with debugging-agent, or refactor with hermetic tests."
+
+prompt = """
+Invoke the developer-skill orchestrator in the active project workspace.
+
+Workflow:
+1. Understand requirements and inspect existing codebase and test configuration.
+2. Delegate to the single responsible specialist agent:
+   - For planned features: coding-agent (author minimal diff) & unit-testing-agent (tests)
+   - For bug fixes: debugging-agent (reproduce, diagnose, edit source code, verify)
+   - For security findings: remediation-agent (authorized security patches)
+   - For structural cleanup: refactoring-agent (preserve intended behavior, verified with appropriate tests)
+3. For bug-fixing tasks, allow debugging-agent to own the complete cycle (reproduction -> root cause -> code modification -> test verification). Do not require calling coding-agent afterwards.
+4. Execute local test runner fresh and capture terminal evidence.
+5. Involve code-review-agent when independent review is required.
+6. Report modified files, executed commands, and verification evidence.
+"""

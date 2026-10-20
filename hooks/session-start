@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+# APEX AI-SDLC — SessionStart hook (UTF-8)
+#
+# Injects the developer-skill and testing-skill routing context into every
+# new session so agents know which APEX skill to invoke without manual lookup.
+#
+# Supports: Claude Code, Cursor, Copilot CLI, Muse, and any SDK-standard host.
+# Wire this via hooks/hooks.json -> SessionStart.
+#
+# Output envelope:
+#   Claude Code  -> hookSpecificOutput.additionalContext
+#   Cursor       -> additional_context
+#   Copilot/Muse -> additionalContext
+
+set -euo pipefail
+
+# Resolve plugin root without dirname (PATH may be broken at SessionStart)
+case "$0" in
+  */*|*\\*) SCRIPT_DIR="$(cd "${0%[/\\]*}" && pwd)" ;;
+  *) SCRIPT_DIR="$(pwd)" ;;
+esac
+PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+# Load developer-skill SKILL.md
+dev_skill="${PLUGIN_ROOT}/skills/developer-skill/SKILL.md"
+test_skill="${PLUGIN_ROOT}/skills/testing-skill/SKILL.md"
+
+dev_content=""
+test_content=""
+
+[ -r "$dev_skill" ]  && dev_content="$(<"$dev_skill")"   || dev_content="(developer-skill SKILL.md not found)"
+[ -r "$test_skill" ] && test_content="$(<"$test_skill")"  || test_content="(testing-skill SKILL.md not found)"
+
+# Escape string for JSON embedding
+escape_for_json() {
+  local s="$1"
+  s="${s//\\/\\\\}"
+  s="${s//\"/\\\"}"
+  s="${s//$'\n'/\\n}"
+  s="${s//$'\r'/\\r}"
+  s="${s//$'\t'/\\t}"
+  printf '%s' "$s"
+}
+
+dev_escaped=$(escape_for_json "$dev_content")
+test_escaped=$(escape_for_json "$test_content")
+
+session_context="<APEX_SKILLS>\nYou have two APEX AI-SDLC skills available:\n\n## developer-skill\nUse for: implementing features, debugging, refactoring, code review, security scanning.\nInvoke: /develop\n\n${dev_escaped}\n\n## testing-skill\nUse for: test strategy, functional/integration/system/regression/performance/security/UAT testing and QA reports.\nInvoke: /test\n\n${test_escaped}\n</APEX_SKILLS>"
+
+# Emit correct envelope per platform
+emit_json() {
+  if command -v cat >/dev/null 2>&1; then
+    printf "$@" | cat
+  else
+    printf "$@"
+  fi
+}
+
+if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
+  emit_json '{\n  "additional_context": "%s"\n}\n' "$session_context"
+elif [ -n "${CLAUDE_PLUGIN_ROOT:-}" ] && [ -z "${COPILOT_CLI:-}" ] && [ -z "${MUSE_PLUGIN_ROOT:-}" ]; then
+  emit_json '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$session_context"
+elif [ -n "${MUSE_PLUGIN_ROOT:-}" ]; then
+  emit_json '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$session_context"
+else
+  emit_json '{\n  "additionalContext": "%s"\n}\n' "$session_context"
+fi
+
+exit 0

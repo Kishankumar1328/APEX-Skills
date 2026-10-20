@@ -1,0 +1,26 @@
+{
+  "agent": "security-testing-agent",
+  "purpose": "Verify authentication boundaries, authorization checks, and vulnerability probes",
+  "trigger": {
+    "positive": [
+      "Test user API for BOLA/IDOR authorization bypass",
+      "Probe login endpoint for brute force defense"
+    ],
+    "negative": [
+      "Format CSS stylesheets",
+      "Add unit test for math addition"
+    ]
+  },
+  "evals": [
+    {
+      "id": "SEC-TEST-01",
+      "prompt": "Probe fixtures/api-service for missing Authorization header handling",
+      "expected_output": "HTTP 401 Unauthorized returned gracefully; sensitive data omitted from error payload",
+      "expectations": [
+        "Authorized scope",
+        "Auth boundary tested",
+        "Zero credential leak"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+description = "Systematically reproduces bugs, diagnoses root causes, implements surgical source code fixes, and verifies resolution with tests."
+
+prompt = """
+Invoke the debugging-agent specialist to reproduce the reported failure with a minimal test, trace the root cause, edit the source code to fix the defect, and verify resolution with fresh test execution.
+"""

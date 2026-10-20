@@ -1,0 +1,26 @@
+{
+  "agent": "complete-qa-agent",
+  "purpose": "Verify consolidated QA reporting, coverage auditing, and release risk ledger",
+  "trigger": {
+    "positive": [
+      "Compile authoritative QA summary for milestone release",
+      "Audit test execution evidence across all test levels"
+    ],
+    "negative": [
+      "Implement feature in code",
+      "Run single unit test"
+    ]
+  },
+  "evals": [
+    {
+      "id": "QA-01",
+      "prompt": "Synthesize comprehensive QA release report across all executed test suites",
+      "expected_output": "Metrics table (Pass/Fail/Blocked/Skipped), active defect log, and residual release risk ledger",
+      "expectations": [
+        "Backed 100% by empirical evidence",
+        "No hidden failures",
+        "Residual risks listed"
+      ]
+    }
+  ]
+}

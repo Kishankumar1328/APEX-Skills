@@ -1,0 +1,16 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "apex-sdlc-skills",
+  "version": "1.0.1",
+  "description": "Evidence-based software development and QA skills for AI coding agents.",
+  "author": {
+    "name": "APEX Engineering"
+  },
+  "license": "MIT",
+  "keywords": [
+    "software-development",
+    "testing",
+    "quality-assurance",
+    "code-review"
+  ]
+}

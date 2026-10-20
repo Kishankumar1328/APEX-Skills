@@ -1,0 +1,26 @@
+{
+  "agent": "test-case-agent",
+  "purpose": "Verify risk-based, many-to-many traceable test case synthesis with preconditions, steps, and invariants",
+  "trigger": {
+    "positive": [
+      "Generate test cases for checkout promotion code validation",
+      "Map acceptance criteria to test matrix"
+    ],
+    "negative": [
+      "Execute test runner in terminal",
+      "Fix code defect"
+    ]
+  },
+  "evals": [
+    {
+      "id": "TC-01",
+      "prompt": "Generate test cases for user password reset flow",
+      "expected_output": "Traceable test cases covering valid token, expired token, malformed email, and rate-limiting",
+      "expectations": [
+        "Many-to-many traceability where applicable",
+        "Clear assertions",
+        "Normal, boundary, and error cases"
+      ]
+    }
+  ]
+}

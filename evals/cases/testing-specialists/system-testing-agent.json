@@ -1,0 +1,26 @@
+{
+  "agent": "system-testing-agent",
+  "purpose": "Verify end-to-end integration flows and process lifecycle states",
+  "trigger": {
+    "positive": [
+      "Test complete order-to-delivery transaction flow",
+      "Verify application startup and shutdown lifecycle"
+    ],
+    "negative": [
+      "Test single isolated function",
+      "Format code with prettier"
+    ]
+  },
+  "evals": [
+    {
+      "id": "SYS-01",
+      "prompt": "Verify application startup, health check endpoint, and graceful shutdown",
+      "expected_output": "Startup verified, HTTP 200 /health observed, graceful connection draining confirmed",
+      "expectations": [
+        "End-to-end lifecycle verified",
+        "No process hang",
+        "Clean exit"
+      ]
+    }
+  ]
+}

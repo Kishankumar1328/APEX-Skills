@@ -1,0 +1,26 @@
+{
+  "agent": "remediation-agent",
+  "purpose": "Verify minimal targeted resolution of confirmed findings without collateral drift",
+  "trigger": {
+    "positive": [
+      "Remediate confirmed SQL injection finding in user query",
+      "Fix review comments in PR #12"
+    ],
+    "negative": [
+      "Rewrite entire module architecture",
+      "Create marketing copy"
+    ]
+  },
+  "evals": [
+    {
+      "id": "REMED-01",
+      "prompt": "Fix unhandled null input finding in fixtures/broken-code without altering existing passing tests",
+      "expected_output": "Minimal patch applied; previous failing check now passes; zero regression in baseline suite",
+      "expectations": [
+        "Minimal diff",
+        "Regression-free execution",
+        "Targeted resolution"
+      ]
+    }
+  ]
+}

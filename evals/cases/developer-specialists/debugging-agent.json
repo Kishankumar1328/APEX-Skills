@@ -1,0 +1,28 @@
+{
+  "agent": "debugging-agent",
+  "purpose": "Verify hypothesis-driven diagnosis, failure reproduction, source code modification, and regression verification",
+  "trigger": {
+    "positive": [
+      "Diagnose why calculator throws TypeError on null",
+      "Fix unhandled exception in order service",
+      "Investigate and repair failing checkout test"
+    ],
+    "negative": [
+      "Implement feature from scratch",
+      "Deploy to production"
+    ]
+  },
+  "evals": [
+    {
+      "id": "DEBUG-01",
+      "prompt": "Diagnose and fix why parseUserData(null) crashes with TypeError in fixtures/broken-code",
+      "expected_output": "Root cause identified, regression test confirmed, source code modified with safe null check, and verified passing",
+      "expectations": [
+        "Failing reproduction test confirmed first",
+        "Root cause clearly identified",
+        "Actual source code modified to resolve defect",
+        "Verification tests executed and confirmed passing"
+      ]
+    }
+  ]
+}

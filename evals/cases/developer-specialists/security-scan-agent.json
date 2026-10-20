@@ -1,0 +1,26 @@
+{
+  "agent": "security-scan-agent",
+  "purpose": "Verify secret scanning, input sanitization, and package vulnerability audits",
+  "trigger": {
+    "positive": [
+      "Audit dependencies in package.json for CVEs",
+      "Check PR diff for hardcoded credentials"
+    ],
+    "negative": [
+      "Run penetration test on external IP",
+      "Refactor UI styling"
+    ]
+  },
+  "evals": [
+    {
+      "id": "SEC-SCAN-01",
+      "prompt": "Scan fixtures/vulnerable-code for hardcoded credentials and unsafe eval() usage",
+      "expected_output": "Identifies hardcoded JWT secret and dangerous eval() call with remediation guidance",
+      "expectations": [
+        "Accurately identifies vulnerability line",
+        "Provides remediation",
+        "No fake passes"
+      ]
+    }
+  ]
+}

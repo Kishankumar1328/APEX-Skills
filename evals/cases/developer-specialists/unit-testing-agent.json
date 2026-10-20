@@ -1,0 +1,26 @@
+{
+  "agent": "unit-testing-agent",
+  "purpose": "Verify hermetic unit test design covering normal, boundary, and error cases",
+  "trigger": {
+    "positive": [
+      "Add hermetic unit tests for string trimmer",
+      "Cover boundary cases in discount calculator"
+    ],
+    "negative": [
+      "Run multi-node integration test",
+      "Review code diff"
+    ]
+  },
+  "evals": [
+    {
+      "id": "UNIT-TEST-01",
+      "prompt": "Write unit tests for add(a, b) covering positive, negative, zero, and type violation cases",
+      "expected_output": "Hermetic test cases with Arrange-Act-Assert pattern and fresh passing evidence",
+      "expectations": [
+        "Deterministic execution",
+        "Clean assertions",
+        "Zero external network calls"
+      ]
+    }
+  ]
+}

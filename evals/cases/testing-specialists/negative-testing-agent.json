@@ -1,0 +1,26 @@
+{
+  "agent": "negative-testing-agent",
+  "purpose": "Verify boundary violations, malformed payloads, and fault tolerance",
+  "trigger": {
+    "positive": [
+      "Inject malformed JSON and boundary values into API endpoint",
+      "Test resilience against unexpected nulls"
+    ],
+    "negative": [
+      "Run happy path checkout test",
+      "Review code style"
+    ]
+  },
+  "evals": [
+    {
+      "id": "NEG-01",
+      "prompt": "Inject type violations and empty payloads into calculator functions",
+      "expected_output": "Graceful TypeError exceptions verified; no unhandled crash; error response schema clean",
+      "expectations": [
+        "Defensive handling proven",
+        "No process crash",
+        "Proper error code"
+      ]
+    }
+  ]
+}

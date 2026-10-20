@@ -1,0 +1,26 @@
+{
+  "agent": "performance-testing-agent",
+  "purpose": "Verify latency and throughput against explicit performance budgets",
+  "trigger": {
+    "positive": [
+      "Benchmark calculation latency against 50ms budget",
+      "Measure requests per second under load"
+    ],
+    "negative": [
+      "Fix spelling typo in docs",
+      "Unit test error message string"
+    ]
+  },
+  "evals": [
+    {
+      "id": "PERF-01",
+      "prompt": "Benchmark 1,000 calculator operations in fixtures/sample-app against 100ms threshold",
+      "expected_output": "Empirical execution time captured, compared against 100ms budget, pass/fail determined",
+      "expectations": [
+        "Real empirical timing",
+        "Compared with target budget",
+        "No fabricated metrics"
+      ]
+    }
+  ]
+}

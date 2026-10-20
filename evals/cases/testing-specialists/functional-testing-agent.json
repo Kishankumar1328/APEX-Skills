@@ -1,0 +1,26 @@
+{
+  "agent": "functional-testing-agent",
+  "purpose": "Verify automated test execution for business rules with objective evidence",
+  "trigger": {
+    "positive": [
+      "Execute automated functional test suite for shopping cart",
+      "Verify order calculation outputs"
+    ],
+    "negative": [
+      "Deploy container to production",
+      "Write technical documentation"
+    ]
+  },
+  "evals": [
+    {
+      "id": "FUNC-01",
+      "prompt": "Execute functional test suite against fixtures/sample-app",
+      "expected_output": "Pass/fail counts, duration, and exit code captured from terminal execution",
+      "expectations": [
+        "Fresh command run",
+        "Zero fake passes",
+        "Raw output captured"
+      ]
+    }
+  ]
+}

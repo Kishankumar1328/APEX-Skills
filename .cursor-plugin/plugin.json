@@ -1,0 +1,15 @@
+{
+  "name": "apex-sdlc-skills",
+  "displayName": "APEX AI-SDLC Skills for Cursor",
+  "version": "1.0.1",
+  "description": "Developer and Testing Skill orchestrators with specialist contracts for Cursor IDE & CLI.",
+  "license": "MIT",
+  "keywords": [
+    "cursor",
+    "rules",
+    "develop",
+    "test",
+    "qa"
+  ],
+  "skills": "./skills"
+}

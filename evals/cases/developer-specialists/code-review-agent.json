@@ -1,0 +1,26 @@
+{
+  "agent": "code-review-agent",
+  "purpose": "Verify multi-axis code evaluation across correctness, security, style, and regression risks",
+  "trigger": {
+    "positive": [
+      "Review pull request diff against 5 axes",
+      "Evaluate code changes for maintainability risks"
+    ],
+    "negative": [
+      "Write unit test suite",
+      "Fix bug directly"
+    ]
+  },
+  "evals": [
+    {
+      "id": "REVIEW-01",
+      "prompt": "Review diff adding unsafe regex parser to authentication module",
+      "expected_output": "Verdict: CHANGES_REQUESTED citing ReDoS vulnerability and missing edge-case unit tests",
+      "expectations": [
+        "5-axis coverage",
+        "Actionable line citations",
+        "Unambiguous verdict"
+      ]
+    }
+  ]
+}

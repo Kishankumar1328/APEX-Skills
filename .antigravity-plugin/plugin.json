@@ -1,0 +1,20 @@
+{
+  "name": "apex-sdlc-skills",
+  "displayName": "APEX AI-SDLC Skills",
+  "version": "1.0.1",
+  "description": "Production-grade Developer Skill and Testing Skill orchestrators for Antigravity IDE & CLI.",
+  "category": "Developer Tools",
+  "keywords": [
+    "apex",
+    "sdlc",
+    "develop",
+    "test",
+    "tdd",
+    "qa"
+  ],
+  "suggestedPrompts": [
+    "Implement an approved feature using /develop",
+    "Run independent QA and regression verification using /test"
+  ],
+  "skills": "./skills"
+}

@@ -1,0 +1,10 @@
+{
+  "name": "apex-sdlc-skills",
+  "version": "1.0.1",
+  "description": "APEX AI-SDLC Developer and Testing Skills for Claude Code CLI.",
+  "license": "MIT",
+  "commands": [
+    "./commands"
+  ],
+  "skills": "./skills"
+}

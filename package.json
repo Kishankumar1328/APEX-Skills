@@ -1,0 +1,20 @@
+{
+  "name": "apex-sdlc-skills",
+  "version": "1.0.1",
+  "private": true,
+  "description": "Evidence-based software development and QA skills for AI coding agents.",
+  "license": "MIT",
+  "scripts": {
+    "validate:skills": "node scripts/validate-apex-skills.js",
+    "validate:platforms": "node scripts/validate-platform-integrations.js",
+    "validate:commands": "node scripts/validate-commands.js",
+    "validate:routing": "node scripts/validate-command-routing.js",
+    "validate:evals": "node scripts/validate-evals.js",
+    "smoke:adapters": "node scripts/smoke-platform-adapters.js",
+    "test": "node scripts/run-evals.js",
+    "ci": "npm run validate:commands && npm run validate:routing && npm run smoke:adapters && npm test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

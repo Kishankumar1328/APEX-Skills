@@ -1,0 +1,26 @@
+{
+  "agent": "uat-agent",
+  "purpose": "Verify end-user acceptance journey simulation with human stakeholder sign-off gate",
+  "trigger": {
+    "positive": [
+      "Simulate user onboarding journey and prepare acceptance evidence",
+      "Validate checkout UX flow for stakeholder review"
+    ],
+    "negative": [
+      "Grant autonomous production deployment approval",
+      "Run low-level unit test"
+    ]
+  },
+  "evals": [
+    {
+      "id": "UAT-01",
+      "prompt": "Simulate persona calculation journey and prepare evidence pack for stakeholder sign-off",
+      "expected_output": "Step-by-step user journey logged; formal sign-off explicitly deferred to human stakeholder",
+      "expectations": [
+        "Simulates user perspective",
+        "Evidence logged",
+        "Human sign-off gate respected"
+      ]
+    }
+  ]
+}

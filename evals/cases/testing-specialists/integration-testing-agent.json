@@ -1,0 +1,26 @@
+{
+  "agent": "integration-testing-agent",
+  "purpose": "Verify API contracts and DB transactions with strict Mock vs Live distinction",
+  "trigger": {
+    "positive": [
+      "Validate payment gateway API integration",
+      "Test database persistence contracts"
+    ],
+    "negative": [
+      "Unit test standalone pure function",
+      "Create UI mockups"
+    ]
+  },
+  "evals": [
+    {
+      "id": "INTEG-01",
+      "prompt": "Test user profile endpoint in fixtures/api-service with explicit mock/live recording",
+      "expected_output": "Schema validated, status 200/400 verified, dependencies recorded as live local or mocked",
+      "expectations": [
+        "Explicit mock vs live distinction",
+        "Status code verified",
+        "No production calls"
+      ]
+    }
+  ]
+}

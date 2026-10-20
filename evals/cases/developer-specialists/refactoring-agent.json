@@ -1,0 +1,26 @@
+{
+  "agent": "refactoring-agent",
+  "purpose": "Verify behavior-preserving code improvements with zero behavioral drift",
+  "trigger": {
+    "positive": [
+      "Simplify nested ternary operators in discount handler",
+      "Extract duplicated validation logic"
+    ],
+    "negative": [
+      "Add new payment gateway feature",
+      "Fix failing unit test"
+    ]
+  },
+  "evals": [
+    {
+      "id": "REFACTOR-01",
+      "prompt": "Refactor fixtures/refactor-target to eliminate duplicated loop while preserving 100% test pass",
+      "expected_output": "Duplicated code extracted into reusable helper; 100% of existing tests remain green",
+      "expectations": [
+        "Zero external contract change",
+        "All pre-existing tests pass",
+        "Readability improved"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "apex-sdlc-skills",
+  "version": "1.0.1",
+  "description": "APEX AI-SDLC Framework skills for OpenAI Codex CLI and Assistant runtimes.",
+  "author": {
+    "name": "APEX Engineering"
+  },
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "APEX SDLC Skills",
+    "shortDescription": "Developer and Testing skill workflows with evidence-based completion.",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "/develop implement requested changes test-first",
+      "/test validate application behavior and log defects"
+    ]
+  }
+}

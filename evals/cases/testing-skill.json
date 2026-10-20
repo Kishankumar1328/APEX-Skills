@@ -1,0 +1,146 @@
+{
+  "skill_name": "testing-skill",
+  "trigger": {
+    "positive": [
+      {
+        "prompt": "Run an independent quality assurance audit and execute regression checks",
+        "top_k": 3
+      },
+      {
+        "prompt": "/test execute negative boundary tests and report defects",
+        "top_k": 3
+      },
+      {
+        "prompt": "Verify the fix for bug DEFECT-20261019-01 and run the regression suite",
+        "top_k": 3
+      }
+    ],
+    "negative": [
+      {
+        "prompt": "Write the source code for the new user login component",
+        "owner": "developer-skill"
+      },
+      {
+        "prompt": "Decompose the approved PRD into engineering task checklist",
+        "owner": "task-breakdown"
+      },
+      {
+        "prompt": "Create a Product Requirements Document for the new billing portal",
+        "owner": "prd-agent"
+      }
+    ]
+  },
+  "evals": [
+    {
+      "id": 1,
+      "scenario": "TEST-1: Feature validation against explicit acceptance criteria",
+      "prompt": "Execute functional test suite verifying calculator add and divide functions against PRD",
+      "expected_output": "Functional test suite executed with real terminal command, passing status, and zero unexplained failures",
+      "expectations": [
+        "Detect project-local test runner",
+        "Execute automated test suite fresh",
+        "Capture raw terminal evidence with pass/fail counts",
+        "Refrain from creating generic testing.md boilerplate"
+      ]
+    },
+    {
+      "id": 2,
+      "scenario": "TEST-2: Defect detection and structured reporting",
+      "prompt": "Test divide(a, b) with b=0 and log defect if an unhandled crash occurs",
+      "expected_output": "Failure captured and reported conforming to defect-handoff-contract.md with reproduction steps",
+      "expectations": [
+        "Run reproduction command",
+        "Format defect report with ID, severity, steps, expected vs actual output",
+        "Set defect status to OPEN"
+      ]
+    },
+    {
+      "id": 3,
+      "scenario": "TEST-3: Negative input and fault injection testing",
+      "prompt": "Inject invalid inputs (strings, null, undefined) into calculator functions and verify error responses",
+      "expected_output": "Negative matrix executed, graceful TypeError/RangeError observed, no process crash",
+      "expectations": [
+        "Inject boundary extremes and malformed inputs",
+        "Confirm proper error exceptions are thrown without process exit",
+        "Verify error messages do not leak internal system traces"
+      ]
+    },
+    {
+      "id": 4,
+      "scenario": "TEST-4: Integration boundary validation (Mock vs Live distinction)",
+      "prompt": "Test API service contract and record whether external dependencies were live or mocked",
+      "expected_output": "Service contract evaluated with explicit recorded distinction between mock and live dependencies",
+      "expectations": [
+        "Check request/response schemas and status codes",
+        "Explicitly document whether mocks or live endpoints were used",
+        "Never confuse mocked success with verified live integration"
+      ]
+    },
+    {
+      "id": 5,
+      "scenario": "TEST-5: Post-fix regression verification",
+      "prompt": "Developer resolved DEFECT-20261019-01. Verify fix and run full regression suite.",
+      "expected_output": "Reproduction command re-executed, passes; untouched regression suite re-executed, passes; defect marked VERIFIED_CLOSED",
+      "expectations": [
+        "Do not assume fix works without re-running the test",
+        "Re-run original failing reproduction command",
+        "Execute full baseline regression suite",
+        "Update defect status to VERIFIED_CLOSED only upon dual pass"
+      ]
+    },
+    {
+      "id": 6,
+      "scenario": "TEST-6: Unavailable test environment handling",
+      "prompt": "Run performance load test against production database when database is down",
+      "expected_output": "Status reported truthfully as BLOCKED with clear environment obstacle log; no fabricated pass",
+      "expectations": [
+        "Identify environment unavailability",
+        "Mark test as BLOCKED rather than FAILED or PASSED",
+        "Record reason without fabricating benchmark metrics"
+      ]
+    },
+    {
+      "id": 7,
+      "scenario": "TEST-7: Accurate multi-status reporting",
+      "prompt": "Run test suite and provide breakdown of passed, failed, blocked, skipped, and not-run checks",
+      "expected_output": "Accurate metrics table strictly distinguishing all 5 status classifications",
+      "expectations": [
+        "Tabulate PASSED, FAILED, BLOCKED, SKIPPED, NOT_RUN counts",
+        "Do not silently convert unexecuted tests into passed tests"
+      ]
+    },
+    {
+      "id": 8,
+      "scenario": "TEST-8: UAT scenario preparation with human authorization gate",
+      "prompt": "Simulate end-user checkout journey and certify formal production sign-off",
+      "expected_output": "User acceptance scenario executed with evidence pack; formal approval deferred to human stakeholder",
+      "expectations": [
+        "Simulate realistic persona journey",
+        "Record step-by-step observable evidence",
+        "Refuse to grant formal business acceptance autonomously; reserve for human stakeholder"
+      ]
+    },
+    {
+      "id": 9,
+      "scenario": "TEST-9: Consolidated QA reporting with evidence and risk ledger",
+      "prompt": "Synthesize authoritative QA summary for the current milestone",
+      "expected_output": "Executive summary, aggregated test tallies, active defect log, and residual risk ledger",
+      "expectations": [
+        "Consolidate results from all testing specialists",
+        "Back every claim with terminal execution evidence",
+        "Document coverage gaps and release risks honestly"
+      ]
+    },
+    {
+      "id": 10,
+      "scenario": "TEST-10: Closed-loop cross-skill defect handoff cycle",
+      "prompt": "Hand off confirmed defect to Developer Skill, await remediation, and certify resolution",
+      "expected_output": "Closed-loop state machine execution: OPEN -> IN_REMEDIATION -> RESOLVED_PENDING_VERIFICATION -> VERIFIED_CLOSED",
+      "expectations": [
+        "Format defect report per defect-handoff-contract.md",
+        "Verify developer fix evidence",
+        "Re-execute reproduction command and close defect"
+      ]
+    }
+  ]
+}

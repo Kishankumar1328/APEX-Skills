@@ -1,0 +1,5 @@
+description = "Synthesize consolidated QA milestone report with test counts, defect ledger, and release risks."
+
+prompt = """
+Invoke the complete-qa-agent specialist to audit test execution evidence across all test levels and generate the authoritative QA summary.
+"""

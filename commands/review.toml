@@ -1,0 +1,6 @@
+description = "Run 5-axis code review across correctness, readability, architecture, security, and performance."
+
+prompt = """
+Invoke the code-review-agent specialist to evaluate the active git diff against acceptance criteria.
+Deliver an explicit APPROVED or CHANGES_REQUESTED verdict with line citations.
+"""

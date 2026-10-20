@@ -1,0 +1,14 @@
+---
+description: Use APEX evidence-based development and testing workflows when implementing, debugging, reviewing, or validating software.
+alwaysApply: true
+---
+
+# APEX AI-SDLC
+
+- For implementation, debugging, refactoring, security remediation, or review, follow `skills/developer-skill/SKILL.md`.
+- For test planning, execution, defect reporting, or fix verification, follow `skills/testing-skill/SKILL.md`.
+- Inspect the repository and requirements before choosing specialists or commands.
+- Use risk-based specialist selection; do not dispatch every specialist by default.
+- Preserve user changes and report only commands and results actually executed.
+- Classify test results as `PASSED`, `FAILED`, `BLOCKED`, `SKIPPED`, `NOT_RUN`, `FLAKY`, or `INCONCLUSIVE`.
+- Formal UAT and release approval remain with authorized human stakeholders.
