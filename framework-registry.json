@@ -1,0 +1,42 @@
+{
+  "canonicalSpecialistRoot": "skills",
+  "derivedSpecialistRoot": ".agents/skills",
+  "orchestrators": {
+    "developer-skill": {
+      "canonical": "skills/developer-skill/SKILL.md",
+      "derived": [
+        ".agents/skills/developer-skill/SKILL.md",
+        ".agents/skills/develop/SKILL.md"
+      ],
+      "specialists": [
+        "coding-agent",
+        "debugging-agent",
+        "unit-testing-agent",
+        "code-review-agent",
+        "security-scan-agent",
+        "remediation-agent",
+        "refactoring-agent"
+      ]
+    },
+    "testing-skill": {
+      "canonical": "skills/testing-skill/SKILL.md",
+      "derived": [
+        ".agents/skills/testing-skill/SKILL.md",
+        ".agents/skills/test/SKILL.md"
+      ],
+      "specialists": [
+        "testing-strategy-agent",
+        "test-case-agent",
+        "functional-testing-agent",
+        "integration-testing-agent",
+        "system-testing-agent",
+        "regression-testing-agent",
+        "negative-testing-agent",
+        "performance-testing-agent",
+        "security-testing-agent",
+        "uat-agent",
+        "complete-qa-agent"
+      ]
+    }
+  }
+}

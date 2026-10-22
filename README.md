@@ -14,6 +14,39 @@ APEX encodes the operational workflows, quality gates, and testing disciplines t
 
 ---
 
+## Start Here
+
+APEX is a workflow package for coding agents. It does not replace your project’s code, test runner, or release process. It gives an agent a repeatable way to choose a focused specialist, make only authorized changes, run relevant checks, and report evidence.
+
+Use APEX in this order:
+
+1. Open the application repository you want to work on. Do not run an application task inside this APEX package unless you are intentionally maintaining the framework.
+2. Choose the outcome you want: implement, debug, test, review, or consolidate QA evidence.
+3. Invoke the matching command or skill and describe the target, acceptance criteria, and constraints.
+4. Read the final report: it must distinguish executed checks from checks that were not run.
+5. Review the diff and test evidence before merging or releasing.
+
+### The two orchestrator skills
+
+| Skill | Use it when | Typical specialist selection |
+|---|---|---|
+| `developer-skill` | You need implementation, debugging, unit tests, refactoring, security scanning, remediation, or a code review. | `coding-agent`, `debugging-agent`, `unit-testing-agent`, `code-review-agent` |
+| `testing-skill` | You need independent QA planning, functional/integration/system testing, regression checks, resilience testing, UAT evidence, or a QA summary. | `testing-strategy-agent`, `test-case-agent`, `functional-testing-agent`, `regression-testing-agent`, `complete-qa-agent` |
+
+Do not invoke every specialist by default. The selected workflow should use only the specialists justified by the requested scope and risk.
+
+### What a good request includes
+
+Give the agent enough context to work safely:
+
+```text
+Use developer-skill. In the current project, add CSV export to the reports page.
+Keep the existing API contract unchanged. Add focused tests, run the relevant checks,
+and report the files changed, exact commands, exit codes, and remaining limitations.
+```
+
+For a review-only request, state that edits are not allowed. For a test-plan request, state whether you want a plan only or authorization to write and run tests.
+
 ## Commands
 
 Five slash commands map directly to the software development and quality lifecycle. Each command invokes the corresponding orchestrator and delegates to specialized agents automatically:
@@ -26,9 +59,21 @@ Five slash commands map directly to the software development and quality lifecyc
 | **Debug & Fix** | `/debug` | `debugging-agent` | Systematic diagnosis, surgical code modification, and regression verification |
 | **Release Certification**| `/qa-summary` | `complete-qa-agent`, `uat-agent` | 7-state execution ledger; human sign-off gate enforced |
 
+### Command examples
+
+```text
+/develop Add rate limiting to the login endpoint. Preserve existing response shapes and add tests.
+/debug A user can submit the same order twice. Reproduce it, add regression coverage, fix it, and retest.
+/test Validate checkout after the payment change. Include failure paths and regression scope.
+/review Review the current diff only. Do not edit files. Return APPROVED or CHANGES_REQUESTED.
+/qa-summary Consolidate the executed QA evidence and list blockers, untested areas, and release risks.
+```
+
+Commands may be exposed as slash commands only on platforms that support them. On other platforms, use the same wording in a normal chat message, for example: `Use testing-skill to create a risk-based test plan for checkout.`
+
 ## How to Use APEX
 
-APEX has **20 defined roles**: **2 orchestrator skills** that decide the workflow and **18 specialist agents** that perform focused work. You normally invoke a command or describe your goal in plain language; the relevant orchestrator then selects only the specialists that fit the request. You do not need to call every agent yourself.
+APEX has **20 registered plugin roles**: **2 orchestrator skills** that decide the workflow and **18 specialist agents** that perform focused work. You normally invoke a command or describe your goal in plain language; the relevant orchestrator then selects only the specialists that fit the request. You do not need to call every agent yourself.
 
 | Role type | Count | What it does | How you use it |
 |---|---:|---|---|
@@ -36,6 +81,8 @@ APEX has **20 defined roles**: **2 orchestrator skills** that decide the workflo
 | Testing Skill | 1 | Owns independent test planning, execution, defect reporting, regression verification, and QA reporting. | Use `/test` or ask to validate behavior, investigate test failures, run regression checks, or prepare QA evidence. |
 | Development specialists | 7 | Perform focused engineering tasks selected by Developer Skill. | Usually selected automatically; use their name only when you need a specific phase. |
 | Testing specialists | 11 | Perform focused test and quality-assurance tasks selected by Testing Skill. | Usually selected automatically; use their name only when you need a specific type of testing. |
+
+The canonical specialist definitions and their derived `.agents/skills/` copies are declared in `framework-registry.json`; CI validates parity and one evaluation case per registered specialist.
 
 ### Choose the command by outcome
 
@@ -63,6 +110,22 @@ APEX has **20 defined roles**: **2 orchestrator skills** that decide the workflo
 | Need resilience, speed, or security probes | `negative-testing-agent` / `performance-testing-agent` / `security-testing-agent` | Tests bad inputs, measured performance, or authorized security boundaries. |
 | Need post-fix confidence or user-journey evidence | `regression-testing-agent` / `uat-agent` | Checks change impact or prepares evidence for stakeholder acceptance. |
 | Need one consolidated quality view | `complete-qa-agent` | Audits evidence and reports test status, defects, gaps, and release risks. |
+
+### Result states and evidence
+
+Use these states in test and QA reports. A state is meaningful only when it is supported by actual execution evidence.
+
+| State | Meaning |
+|---|---|
+| `PASSED` | The intended checks executed and their required assertions passed. |
+| `FAILED` | A verified check failed against the expected behavior. |
+| `BLOCKED` | A material environment, dependency, access, or infrastructure issue prevented execution. |
+| `SKIPPED` | The check was deliberately bypassed with a recorded reason. |
+| `NOT_RUN` | The check was planned but not executed. |
+| `FLAKY` | Comparable runs produced inconsistent results. |
+| `INCONCLUSIVE` | The available evidence is insufficient or contradictory. |
+
+A final report should include the target scope, files changed, exact commands, exit codes, relevant output, verdict, and unverified areas. A passing command is evidence for that command’s scope; it is not proof that the whole application is defect-free.
 
 ### Calling it on each platform
 
@@ -313,17 +376,21 @@ E:\SKILL\
 
 ## Verification & Evaluation Suite
 
-APEX includes a built-in verification suite that validates skill schemas, platform manifests, evaluation cases, and executes tests against realistic fixtures:
+APEX includes a built-in offline verification suite. It validates skill schemas, canonical/derived specialist parity, command routing, platform metadata, evaluation cases, and executable fixtures:
 
 ```bash
-# Run the complete 4-stage master evaluation suite
-node scripts/run-evals.js
+# Run the complete CI-equivalent suite
+npm run ci
 
-# Or validate individual subsystems
+# Or run individual checks
 node scripts/validate-apex-skills.js            # Validate all 18 specialists and SKILL.md files
+node scripts/validate-framework-registry.js     # Validate canonical definitions, derived copies, and eval coverage
 node scripts/validate-commands.js               # Validate slash command TOML/Markdown parity
+node scripts/validate-command-routing.js        # Validate command targets
 node scripts/validate-platform-integrations.js  # Validate all 4 IDE plugin manifests
 node scripts/validate-evals.js                  # Validate all 20 eval schemas
+node --test scripts/fixture-runner.test.js      # Verify fixture failure handling
+node scripts/run-evals.js                       # Generate the offline evaluation report
 ```
 
 For local CI-equivalent verification, Node.js 18 or newer is required. The project has no runtime dependencies:
@@ -332,13 +399,35 @@ For local CI-equivalent verification, Node.js 18 or newer is required. The proje
 npm run ci
 ```
 
-This runs command-routing validation, manifest path smoke checks, structural validation, evaluation-schema validation, and the four executable fixtures. GitHub Actions runs the same command for pushes and pull requests.
+This runs structural, registry, command, routing, evaluation-schema, platform-metadata, adapter-smoke, fixture-runner, and executable-fixture checks. GitHub Actions runs the same command for pushes and pull requests.
 
 ### Platform smoke-test boundary
 
 The repository validates platform manifest structure and local paths offline. That confirms the package is internally consistent, but it does **not** prove native registration in a running Codex, Claude Code, Cursor, or Antigravity installation. Run the platform's own installation flow and invoke `/develop` or `/test` in a disposable workspace before treating a platform adapter as deployment-verified.
 
-Current local evidence: Antigravity accepted the package with `agy plugin validate E:\SKILL`; Codex installed `apex-sdlc-skills@apex-local` from the local marketplace. Claude Code loaded the plugin but its configured `openrouter/free` default model was rejected before the smoke prompt could execute. Cursor CLI was not installed on this machine.
+Current local evidence: Antigravity and Codex each completed a live skill invocation in a disposable calculator workspace and reported a successful test run. Claude Code and Cursor still require live invocation evidence.
+
+### Live-platform verification checklist
+
+Offline CI does not prove that a real agent host discovers and follows a skill. Use a disposable project such as `evals/fixtures/sample-app` copied outside this repository, then perform the following on each platform:
+
+1. Confirm the APEX skill or command is visible in the platform UI.
+2. Request one small test-only change through `developer-skill`.
+3. Confirm the agent changes only the disposable project, runs the real test command, and reports the command, exit code, and test count.
+4. Request a review-only task and a QA/test-plan task; confirm neither modifies code and each uses the appropriate workflow.
+5. Temporarily introduce a failing assertion. Confirm the agent reports `FAILED` with the non-zero exit code and failure evidence; then restore the fixture and rerun tests.
+
+Record the platform version, prompt, agent response, modified files, command, exit code, and result. Do not label a platform verified merely because its manifest passed validation.
+
+## Troubleshooting
+
+| Symptom | What to check |
+|---|---|
+| A skill is not visible | Restart the host after installation, confirm the manifest and skill folder are in the documented location, and begin a new chat/session. |
+| A command is unavailable | Use a normal-language request naming `developer-skill` or `testing-skill`; not every host exposes slash commands. |
+| The agent edits the wrong repository | Stop the task, confirm the active workspace path, and use a disposable test project for platform validation. |
+| A test command fails | Preserve the command output, identify whether the cause is code, test, environment, or setup, and report the correct result state. |
+| A platform manifest passes but the host does not load it | Treat it as an installation/discovery issue, not proof of a framework defect; capture host version and installation steps. |
 
 ## Releases
 
@@ -348,4 +437,4 @@ The current release is recorded in `plugin.json`, each platform adapter manifest
 
 ## License
 
-MIT © 2026 APEX Framework Contributors. Inspired by modular agent design patterns from Addy Osmani and testing disciplines from Superpowers.
+MIT © 2026 APEX Framework Contributors.

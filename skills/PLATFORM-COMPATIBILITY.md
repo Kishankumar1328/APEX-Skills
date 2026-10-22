@@ -9,7 +9,7 @@
 
 ### Global vs Workspace Customization
 
-- **Global Skills:** Located at `C:\Users\ADMIN\.gemini\config\skills\<skill-name>\SKILL.md`.
+- **Global Skills:** Located at `%USERPROFILE%\.gemini\config\skills\<skill-name>\SKILL.md` on Windows.
 - **Workspace Skills:** Located at `<workspace-root>\.agents\skills\<skill-name>\SKILL.md`.
 - **Invocation Triggers:** Slash commands such as `/develop` and `/test`, or natural-language skill triggers.
 

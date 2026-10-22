@@ -18,7 +18,7 @@
     "negative": [
       {
         "prompt": "Draft a Product Requirements Document for the new payment checkout flow",
-        "owner": "prd-agent"
+        "owner": "project-requirements-or-planning-workflow"
       },
       {
         "prompt": "Create a Phase 1 implementation plan and milestone schedule for the project",

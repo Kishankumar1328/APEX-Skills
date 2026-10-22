@@ -1,127 +1,122 @@
 {
-  "timestamp": "2026-10-20T05:36:45.338Z",
-  "structuralValidation": "PASSED",
-  "platformValidation": "PASSED",
-  "evalCasesChecked": 20,
-  "specialistCaseAudits": [
+  "timestamp": "2026-10-22T05:30:36.877Z",
+  "executedChecks": [
     {
-      "target": "developer-skill",
-      "category": "Orchestrator",
-      "status": "PASSED"
+      "name": "skillStructure",
+      "command": "node scripts/validate-apex-skills.js",
+      "status": "PASSED",
+      "exitCode": 0,
+      "output": "=== Validating APEX Framework Skills ===\n\n  [PASS] developer-skill (7 specialists verified)\n  [PASS] testing-skill (11 specialists verified)\n  [PASS] defect-handoff-contract.md exists and has valid Markdown structure\n  [PASS] PLATFORM-COMPATIBILITY.md exists and has valid Markdown structure\n\nResult: ALL SKILL STRUCTURES VALIDATED SUCCESSFULLY"
     },
     {
-      "target": "testing-skill",
-      "category": "Orchestrator",
-      "status": "PASSED"
+      "name": "frameworkRegistry",
+      "command": "node scripts/validate-framework-registry.js",
+      "status": "PASSED",
+      "exitCode": 0,
+      "output": "Framework registry validation passed (18 registered specialists)."
     },
     {
-      "target": "code-review-agent",
-      "category": "Dev Specialist",
-      "status": "PASSED"
+      "name": "commandDefinitions",
+      "command": "node scripts/validate-commands.js",
+      "status": "PASSED",
+      "exitCode": 0,
+      "output": "=== Validating APEX Commands & Parity ===\n\nFound 5 .toml command(s) and 5 .md command(s).\n  ✔ [PASS] debug.toml valid TOML command spec\n  ✔ [PASS] develop.toml valid TOML command spec\n  ✔ [PASS] qa-summary.toml valid TOML command spec\n  ✔ [PASS] review.toml valid TOML command spec\n  ✔ [PASS] test.toml valid TOML command spec\n  ✔ [PASS] debug.md valid Markdown command entrypoint\n  ✔ [PASS] develop.md valid Markdown command entrypoint\n  ✔ [PASS] qa-summary.md valid Markdown command entrypoint\n  ✔ [PASS] review.md valid Markdown command entrypoint\n  ✔ [PASS] test.md valid Markdown command entrypoint\n\nCommand Validation: ALL COMMANDS VALIDATED SUCCESSFULLY"
     },
     {
-      "target": "coding-agent",
-      "category": "Dev Specialist",
-      "status": "PASSED"
+      "name": "commandRouting",
+      "command": "node scripts/validate-command-routing.js",
+      "status": "PASSED",
+      "exitCode": 0,
+      "output": "Command routing validation passed."
     },
     {
-      "target": "debugging-agent",
-      "category": "Dev Specialist",
-      "status": "PASSED"
+      "name": "platformMetadata",
+      "command": "node scripts/validate-platform-integrations.js",
+      "status": "PASSED",
+      "exitCode": 0,
+      "output": "=== Validating APEX Platform Integrations ===\n\nValidation Results:\n  ✔ [PASS] plugin.json valid JSON with fields [$schema, name, version, description, license]\n  ✔ [PASS] .antigravity-plugin/plugin.json valid JSON with fields [name, displayName, version, skills]\n  ✔ [PASS] .cursor-plugin/plugin.json valid JSON with fields [name, displayName, version, skills]\n  ✔ [PASS] .codex-plugin/plugin.json valid JSON with fields [name, version, skills, interface]\n  ✔ [PASS] .claude-plugin/plugin.json valid JSON with fields [name, version, commands, skills]\n  ✔ [PASS] commands/develop.md exists\n  ✔ [PASS] commands/test.md exists\n  ✔ [PASS] commands/debug.md exists\n  ✔ [PASS] commands/review.md exists\n  ✔ [PASS] commands/qa-summary.md exists\n  ✔ [PASS] AGENTS.md exists\n  ✔ [PASS] .agents/plugins/marketplace.json valid JSON with fields [name, plugins]\n  ✔ [PASS] .cursor/rules/apex-sdlc.mdc exists\n  ✔ [PASS] .github/copilot-instructions.md exists\n  ✔ [PASS] skills/developer-skill/SKILL.md exists\n  ✔ [PASS] skills/testing-skill/SKILL.md exists\n  ✔ [PASS] skills/defect-handoff-contract.md exists\n  ✔ [PASS] skills/PLATFORM-COMPATIBILITY.md exists\n\nResult: ALL 18 PLATFORM INTEGRATION CHECKS PASSED (exit code 0)"
     },
     {
-      "target": "refactoring-agent",
-      "category": "Dev Specialist",
-      "status": "PASSED"
+      "name": "platformAdapterMetadata",
+      "command": "node scripts/smoke-platform-adapters.js",
+      "status": "PASSED",
+      "exitCode": 0,
+      "output": "Platform adapter offline metadata smoke checks passed; installation and invocation were not run."
     },
     {
-      "target": "remediation-agent",
-      "category": "Dev Specialist",
-      "status": "PASSED"
-    },
-    {
-      "target": "security-scan-agent",
-      "category": "Dev Specialist",
-      "status": "PASSED"
-    },
-    {
-      "target": "unit-testing-agent",
-      "category": "Dev Specialist",
-      "status": "PASSED"
-    },
-    {
-      "target": "complete-qa-agent",
-      "category": "Test Specialist",
-      "status": "PASSED"
-    },
-    {
-      "target": "functional-testing-agent",
-      "category": "Test Specialist",
-      "status": "PASSED"
-    },
-    {
-      "target": "integration-testing-agent",
-      "category": "Test Specialist",
-      "status": "PASSED"
-    },
-    {
-      "target": "negative-testing-agent",
-      "category": "Test Specialist",
-      "status": "PASSED"
-    },
-    {
-      "target": "performance-testing-agent",
-      "category": "Test Specialist",
-      "status": "PASSED"
-    },
-    {
-      "target": "regression-testing-agent",
-      "category": "Test Specialist",
-      "status": "PASSED"
-    },
-    {
-      "target": "security-testing-agent",
-      "category": "Test Specialist",
-      "status": "PASSED"
-    },
-    {
-      "target": "system-testing-agent",
-      "category": "Test Specialist",
-      "status": "PASSED"
-    },
-    {
-      "target": "test-case-agent",
-      "category": "Test Specialist",
-      "status": "PASSED"
-    },
-    {
-      "target": "testing-strategy-agent",
-      "category": "Test Specialist",
-      "status": "PASSED"
-    },
-    {
-      "target": "uat-agent",
-      "category": "Test Specialist",
-      "status": "PASSED"
+      "name": "offlineScenarioSpecifications",
+      "command": "node scripts/validate-evals.js",
+      "status": "PASSED",
+      "exitCode": 0,
+      "output": "=== Validating Evaluation Cases Schema ===\n\n  ✔ [PASS] [Orchestrator] developer-skill.json (8 eval scenario(s))\n  ✔ [PASS] [Orchestrator] testing-skill.json (10 eval scenario(s))\n  ✔ [PASS] [Dev Specialist] code-review-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Dev Specialist] coding-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Dev Specialist] debugging-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Dev Specialist] refactoring-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Dev Specialist] remediation-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Dev Specialist] security-scan-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Dev Specialist] unit-testing-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Test Specialist] complete-qa-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Test Specialist] functional-testing-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Test Specialist] integration-testing-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Test Specialist] negative-testing-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Test Specialist] performance-testing-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Test Specialist] regression-testing-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Test Specialist] security-testing-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Test Specialist] system-testing-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Test Specialist] test-case-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Test Specialist] testing-strategy-agent.json (1 eval scenario(s))\n  ✔ [PASS] [Test Specialist] uat-agent.json (1 eval scenario(s))\n\nTotal Cases Checked: 20 | Errors: 0\nAll Evaluation Case Schemas are Valid."
     }
   ],
-  "fixtureTestRuns": [
+  "offlineScenarioSpecificationValidation": {
+    "status": "PASSED",
+    "command": "node scripts/validate-evals.js",
+    "note": "Offline schema and prompt-expectation checks only; no agent was executed."
+  },
+  "executableFixtureTests": [
     {
-      "fixture": "sample-app",
-      "status": "PASSED"
+      "name": "sample-app",
+      "command": "node --test tests/calculator.test.js",
+      "status": "PASSED",
+      "exitCode": 0,
+      "assertions": [
+        "tests 7",
+        "pass 7",
+        "fail 0"
+      ],
+      "errors": [],
+      "output": "✔ add() adds two numbers (0.756ms)\n✔ divide() divides two numbers (0.1047ms)\n✔ divide() throws on division by zero (0.2811ms)\n✔ multiply() multiplies two numbers (0.0832ms)\n✔ multiply() throws on non-number inputs (0.1335ms)\n✔ subtract() subtracts two numbers (0.0858ms)\n✔ subtract() throws TypeError on non-number (0.078ms)\nℹ tests 7\nℹ suites 0\nℹ pass 7\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 77.6429"
     },
     {
-      "fixture": "broken-code",
-      "status": "PASSED"
+      "name": "broken-code",
+      "command": "node --test test.js",
+      "status": "PASSED",
+      "exitCode": 0,
+      "assertions": [
+        "tests 2",
+        "pass 2",
+        "fail 0"
+      ],
+      "errors": [],
+      "output": "✔ parses valid user data (0.6388ms)\n✔ handles null safely (currently broken) (0.6348ms)\nℹ tests 2\nℹ suites 0\nℹ pass 2\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 75.9785"
     },
     {
-      "fixture": "refactor-target",
-      "status": "PASSED"
+      "name": "refactor-target",
+      "command": "node --test test.js",
+      "status": "PASSED",
+      "exitCode": 0,
+      "assertions": [
+        "tests 3",
+        "pass 3",
+        "fail 0"
+      ],
+      "errors": [],
+      "output": "✔ VIP receives 20% discount (0.5849ms)\n✔ MEMBER receives 10% discount (0.0974ms)\n✔ Standard receives 0% discount (0.0974ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 73.0717"
     },
     {
-      "fixture": "api-service",
-      "status": "PASSED"
+      "name": "api-service",
+      "command": "node --test test.js",
+      "status": "PASSED",
+      "exitCode": 0,
+      "assertions": [
+        "tests 3",
+        "pass 3",
+        "fail 0"
+      ],
+      "errors": [],
+      "output": "✔ returns 401 when token missing (0.8357ms)\n✔ returns 400 when userId missing (0.1158ms)\n✔ returns 200 on valid request (0.1034ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 75.1935"
     }
   ],
-  "overallStatus": "PASSED"
+  "liveAgentBehaviorEvaluation": {
+    "status": "NOT_RUN",
+    "reason": "No model-backed evaluator or supported host invocation was configured for this run."
+  },
+  "platformInstallationAndInvocation": {
+    "status": "NOT_RUN",
+    "reason": "Antigravity, Codex CLI, Cursor, and Claude Code were not installed and invoked by this runner."
+  },
+  "overallStatus": "PASSED_OFFLINE"
 }

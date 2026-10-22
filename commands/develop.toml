@@ -5,7 +5,7 @@ Invoke the developer-skill orchestrator in the active project workspace.
 
 Workflow:
 1. Understand requirements and inspect existing codebase and test configuration.
-2. Delegate to the single responsible specialist agent:
+2. Select the responsible specialist or specialists required by the task:
    - For planned features: coding-agent (author minimal diff) & unit-testing-agent (tests)
    - For bug fixes: debugging-agent (reproduce, diagnose, edit source code, verify)
    - For security findings: remediation-agent (authorized security patches)

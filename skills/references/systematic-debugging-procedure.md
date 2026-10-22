@@ -2,7 +2,7 @@
 
 **Document type:** Specialist Reference (`skills/references/systematic-debugging-procedure.md`)  
 **Project:** APEX AI-SDLC Skill Framework  
-**Reference Source:** Obra `superpowers/skills/systematic-debugging`
+**Reference Source:** APEX debugging workflow
 
 ---
 
